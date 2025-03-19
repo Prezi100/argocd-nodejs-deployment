@@ -1,13 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: argocdapp 
+  namespace: default  
   labels:
-    app: nginx
+    app: argocdapp    
 spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-    targetPort: 80
   selector:
-    app: nginx
+    app: argocdapp   
+  ports:
+    - protocol: TCP    
+      port: 3000        
+      targetPort: 3000 
+  type: LoadBalancer      
+  

@@ -1,21 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: argocdapp
+  namespace: default
   labels:
-    app: nginx
+    app: argocdapp
 spec:
-  replicas: 3
+  replicas: 2  # Number of pod replicas
   selector:
     matchLabels:
-      app: nginx
+      app: argocdapp
   template:
     metadata:
       labels:
-        app: nginx
+        app: argocdapp
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
+        - name: argocdapp
+          image: ogunmolu/argocd  # Container image
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000  # Exposing port
